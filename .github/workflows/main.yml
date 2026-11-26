@@ -17,7 +17,6 @@ jobs:
         run: |
           unzip -o "*.zip" -d project_dir
           cd project_dir
-          # اگر فایل‌ها داخل یک پوشه زیرمجموعه بودند به بیرون منتقل شوند
           if [ ! -f "settings.gradle.kts" ] && [ ! -f "settings.gradle" ]; then
             SUBDIR=$(find . -maxdepth 2 -name "settings.gradle*" -exec dirname {} \; | head -n 1)
             mv "$SUBDIR"/* . 2>/dev/null || true
@@ -33,7 +32,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.11.1'
+          gradle-version: '9.3.1'
 
       - name: Build Debug APK
         working-directory: ./project_dir
